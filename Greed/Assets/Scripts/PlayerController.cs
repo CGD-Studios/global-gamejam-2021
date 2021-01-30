@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         // Sets the movement vector with input
         movement = (transform.right * Input.GetAxisRaw("Horizontal")) + (transform.forward * Input.GetAxisRaw("Vertical"));
-
+        /*
         // Attack input
         if (Input.GetButtonDown("Attack")) {
             //TODO attack
@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Inv5")) {
 
         } //TODO Add more or delete inventory?
+        */
     }
 
     void FixedUpdate() {
