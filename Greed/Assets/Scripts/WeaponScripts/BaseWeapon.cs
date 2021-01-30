@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class BaseWeapon : MonoBehaviour
 {
-    Rigidbody rigidBody;
-    Animator attackAnimation;
-    Animator switchingOutAnimation;
-    Animator switchingInAnimation;
+    
+    public Animator animator;
     //for picking up weapon I guess
-    BoxCollider boxCollider;
+    BoxCollider pickUpCollider;
+    BoxCollider damageCollider;
 
     //variables for the stats
     //make it public so designer can set the value
     public int durability = 20;
     public int damage = 10;
     public double scoreValue = 10;
+    public int weaponType;
 
     //variable for attacking status
     bool isAttacking;
@@ -23,11 +23,10 @@ public class BaseWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody>();
-        attackAnimation = GetComponent<Animator>();
-        switchingInAnimation = GetComponent<Animator>();
-        switchingOutAnimation = GetComponent<Animator>();
-        boxCollider = GetComponent<BoxCollider>();
+        animator = GetComponent<Animator>();
+        pickUpCollider = GetComponent<BoxCollider>();
+        damageCollider = GetComponent<BoxCollider>();
+        animator.SetInteger("WeaponType", weaponType);
     }
 
     public void startAttacking()
@@ -38,18 +37,16 @@ public class BaseWeapon : MonoBehaviour
             return;
         }
         //tbh maybe move this bool to PlayerController instead
-        isAttacking = true; 
+        isAttacking = true;
         //starting animation
-        attackAnimation.Play("Base Layer.");
+        animator.SetBool("IsAttacking", true);
     }
 
     public void stopAttacking()
     {
+        Debug.Log("Stop attacking");
         isAttacking = false;
-    }
-
-    public void switchOutWeapon()
-    {
+        animator.SetBool("IsAttacking", false);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -58,7 +55,7 @@ public class BaseWeapon : MonoBehaviour
 
         if (isAttacking)
         {
-            if (collision.collider.tag == "Melee")
+            if (collision.collider.tag == "Enemy")
             {
                 //Damage Enemy
                 durability -= 1;

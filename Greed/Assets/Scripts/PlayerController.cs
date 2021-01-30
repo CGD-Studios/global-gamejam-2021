@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour {
         cam = GetComponentInChildren<Camera>();
         inventory = new GameObject[inventorySize];
 
-        weapon = GetComponent<BaseWeapon>();
         isAttacking = false;
         isSwitching = false;
     }
@@ -59,6 +58,7 @@ public class PlayerController : MonoBehaviour {
 
             if (!isAttacking || !isSwitching)
             {
+                Debug.Log("Attacking");
                 weapon.startAttacking();
             }
             //TODO attack
