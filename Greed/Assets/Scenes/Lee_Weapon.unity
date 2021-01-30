@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f3a0906b4d36d47a97d7b822862e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   durability: 20
   damage: 30
   scoreValue: 10
@@ -250,7 +251,7 @@ Transform:
   m_GameObject: {fileID: 91586539}
   m_LocalRotation: {x: 0.057423912, y: -0.6917284, z: 0.122086056, w: -0.70944303}
   m_LocalPosition: {x: 0.636, y: 1.734, z: 1.211}
-  m_LocalScale: {x: 3.58235, y: 5.8929996, z: 1.00368}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -833,13 +834,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609384267}
-  m_LocalRotation: {x: 0.23822525, y: -0.5654503, z: 0.39316428, w: -0.6847895}
-  m_LocalPosition: {x: 0.636, y: -0.176, z: 1.516}
-  m_LocalScale: {x: 3.582353, y: 5.8929977, z: 1.0036848}
+  m_LocalRotation: {x: 0.23821078, y: -0.56545866, z: 0.3931754, w: -0.6847812}
+  m_LocalPosition: {x: 0.636, y: -0.086, z: 1.211}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children: []
   m_Father: {fileID: 385225605}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -353.202, y: 75.595, z: -54.449}
+  m_LocalEulerAnglesHint: {x: -353.2, y: 75.595, z: -54.449}
 --- !u!114 &1609384273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,6 +853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f3a0906b4d36d47a97d7b822862e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1609384268}
   durability: 20
   damage: 50
   scoreValue: 10
