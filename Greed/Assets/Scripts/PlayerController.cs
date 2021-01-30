@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] GameObject activeWeapon;
 
     //Weapon
-    BaseWeapon weapon;
+    public BaseWeapon weapon;
     bool isAttacking;
     bool isSwitching;
 
@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour {
         player = GetComponent<CharacterController>();
         cam = GetComponentInChildren<Camera>();
         inventory = new GameObject[inventorySize];
+
+        weapon = GetComponent<BaseWeapon>();
+        isAttacking = false;
+        isSwitching = false;
     }
 
     // Update is called once per frame

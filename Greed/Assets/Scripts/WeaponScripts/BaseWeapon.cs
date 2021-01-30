@@ -8,6 +8,7 @@ public class BaseWeapon : MonoBehaviour
     Animator attackAnimation;
     Animator switchingOutAnimation;
     Animator switchingInAnimation;
+    //for picking up weapon I guess
     BoxCollider boxCollider;
 
     //variables for the stats
