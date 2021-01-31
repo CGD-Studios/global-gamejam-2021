@@ -27,6 +27,7 @@ public class CountDownTimer : MonoBehaviour
         do
         {
             timer -= Time.deltaTime;
+            if (timer <= 10) SoundManager.PlayClockFast();
 
             FormatText();
 
