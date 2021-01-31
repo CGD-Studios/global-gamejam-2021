@@ -51,13 +51,14 @@ public class PlayerController : MonoBehaviour {
         player.Move(movement * speed * Time.deltaTime);
         if (!grounded) {
             player.Move(Vector3.up * -9.81f * Time.deltaTime);
-        }
+        } else if (movement.magnitude > 0) SoundManager.PlayWalk();
 
         // Attack input
         if (Input.GetButtonDown("Attack")) {
             if (inventory[selectedInventory]) {
                 if (!isAttacking || !isSwitching) {
                     inventory[selectedInventory].startAttacking();
+                    SoundManager.PlayAttack(inventory[selectedInventory].weaponType);
                 }
             }
         }
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour {
             } else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out itemRayHit, itemRange, LayerMask.GetMask("Key"))) {
                 Destroy(itemRayHit.transform.gameObject);
                 GameController.StartTimer();
+                SoundManager.PlayClockSlow();
             }
         }
 
@@ -118,6 +120,12 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Inv5")) {
             if ((selectedInventory != 4 && !inventory[selectedInventory].GetIsAttacking()) || !inventory[selectedInventory]) SelectWeapon(4);
         } //TODO Add more or remove inventory?
+    }
+
+    private void FixedUpdate() {
+        if (Physics.OverlapSphere(transform.position, 7f, LayerMask.GetMask("Enemy")).Length > 0) {
+            SoundManager.PlayFight();
+        } else SoundManager.OutOfCombat();
     }
 
     // Selects weapon from your inventory

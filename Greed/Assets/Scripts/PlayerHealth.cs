@@ -27,7 +27,8 @@ public class PlayerHealth : MonoBehaviour {
         healthBar.SetHelth(currentHealth);
 
         if (currentHealth <= 0) {
+            SoundManager.PlayDeath();
             GameController.Death();
-        }
+        } else SoundManager.PlayHurt();
     }
 }
