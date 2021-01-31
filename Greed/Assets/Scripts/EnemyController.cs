@@ -52,6 +52,7 @@ public class EnemyController : MonoBehaviour
             {
                 // attack player
                 // TODO: implement proper attack logic
+                GameController.TakeDamage(baseDamage); //TO CHANGE
                 Debug.Log("Attack Player");
             }
         }

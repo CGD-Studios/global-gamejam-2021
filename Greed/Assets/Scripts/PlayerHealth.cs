@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
-{
+public class PlayerHealth : MonoBehaviour {
 
     public int maxHealth = 100;
     public int currentHealth;
@@ -11,25 +10,24 @@ public class PlayerHealth : MonoBehaviour
     public HealthBar healthBar;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+    void Update() {
+        /*if (Input.GetKeyDown(KeyCode.Space)) {
             TakeDamage(5);
-        }
+        }*/
+    }
+    public void TakeDamage(int damage) {
+        currentHealth -= damage;
 
-        void TakeDamage(int damage)
-        {
-            currentHealth -= damage;
+        healthBar.SetHelth(currentHealth);
 
-            healthBar.SetHelth(currentHealth);
+        if (currentHealth <= 0) {
+            GameController.Death();
         }
     }
 }
