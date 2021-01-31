@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour {
         grounded = Physics.OverlapSphere(groundCheck.position, 0.1f, LayerMask.GetMask("Ground")).Length > 0;
 
         // Sets the movement vector with input
+        movement = (transform.right * Input.GetAxisRaw("Horizontal")) + (transform.forward * Input.GetAxisRaw("Vertical"));
         movement = ((transform.right * Input.GetAxisRaw("Horizontal")) + (transform.forward * Input.GetAxisRaw("Vertical"))).normalized;
 
         // Move the player and apply gravity when not grounded
@@ -52,7 +53,6 @@ public class PlayerController : MonoBehaviour {
         if (!grounded) {
             player.Move(Vector3.up * -9.81f * Time.deltaTime);
         }
-
         // Attack input
         if (Input.GetButtonDown("Attack")) {
 
