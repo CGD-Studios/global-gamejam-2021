@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour
             // Raycast to see if can see player
             RaycastHit hit;
             Vector3 rayDirection = goal.position - transform.position;
-            if(Physics.Raycast(transform.position, rayDirection.normalized, out hit, rayDirection.magnitude, LayerMask.GetMask(playerTag)))
+            if(Physics.Raycast(transform.position, rayDirection.normalized, out hit, rayDirection.magnitude))
             {
                 if(hit.transform.gameObject.tag == playerTag)
                 {
