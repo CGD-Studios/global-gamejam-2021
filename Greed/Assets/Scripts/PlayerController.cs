@@ -24,11 +24,19 @@ public class PlayerController : MonoBehaviour {
     int weaponStored = 0;
     [SerializeField] GameObject activeWeapon;
 
+    //Weapon
+    public BaseWeapon weapon;
+    bool isAttacking;
+    bool isSwitching;
+
     // Start is called before the first frame update
     void Start() {
         player = GetComponent<CharacterController>();
         cam = GetComponentInChildren<Camera>();
         inventory = new GameObject[inventorySize];
+
+        isAttacking = false;
+        isSwitching = false;
     }
 
     // Update is called once per frame
@@ -47,6 +55,12 @@ public class PlayerController : MonoBehaviour {
 
         // Attack input
         if (Input.GetButtonDown("Attack")) {
+
+            if (!isAttacking || !isSwitching)
+            {
+                Debug.Log("Attacking");
+                weapon.startAttacking();
+            }
             //TODO attack
         }
         
