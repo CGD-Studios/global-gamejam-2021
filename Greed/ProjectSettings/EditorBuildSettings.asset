@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MENU.unity
     guid: 9fe65571385dffd42a1624ad04bf99e7
   - enabled: 1
-    path: Assets/Scenes/Peru_Player_Controller.unity
-    guid: ebeeae44d780b63448b91d4a01f6bb93
+    path: Assets/Scenes/MainScene.unity
+    guid: 5c4c095e88c5c2c4a8f7733e4390fe55
+  - enabled: 1
+    path: Assets/Scenes/GameClear.unity
+    guid: bc1c20edcc4053a40914780a4fc7ef7e
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 0f71ec84ee0f4bc4c9ee6650ec2a7fee
   m_configObjects: {}

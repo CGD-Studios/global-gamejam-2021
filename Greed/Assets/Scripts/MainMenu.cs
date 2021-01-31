@@ -5,10 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public void StartMenu() {
+        SoundManager.StartMenu();
+        SceneManager.LoadScene(0);
+    }
+
     public void PlayGame() 
     {
         SoundManager.PlayRoaming();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame() 

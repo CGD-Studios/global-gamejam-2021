@@ -100,6 +100,10 @@ public class SoundManager : MonoBehaviour {
         instance.enemyHit.Play();
     }
 
+    public static void StartMenu() {
+        instance.PlayMenu();
+    }
+
     void PlayMenu() {
         menuMusic.volume = 0;
         menuMusic.Play();
