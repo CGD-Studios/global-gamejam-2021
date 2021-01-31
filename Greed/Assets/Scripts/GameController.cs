@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour {
 
     public static void Death() {
         //gameover
+        SoundManager.PlayGameOver();
     }
 
     public static void StartTimer() {
@@ -51,5 +52,6 @@ public class GameController : MonoBehaviour {
 
     public static void TimerEnd() {
         //gameover
+        SoundManager.PlayGameOver();
     }
 }
