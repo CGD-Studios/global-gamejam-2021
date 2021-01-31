@@ -149,7 +149,7 @@ MonoBehaviour:
   damage: 50
   scoreValue: 10
   weaponType: 0
-  icon: {fileID: 21300000, guid: 389eb7148079f4b408e1fcfdd518ad29, type: 3}
+  icon: {fileID: 21300000, guid: cc4a7d847f37ef54b92b0e4e765cf45b, type: 3}
 --- !u!1 &5674019413738341156
 GameObject:
   m_ObjectHideFlags: 0
