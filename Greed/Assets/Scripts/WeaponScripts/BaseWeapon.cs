@@ -87,6 +87,7 @@ public class BaseWeapon : MonoBehaviour
             durability -= 1;
             GameController.ItemDamaged(this);
             other.GetComponent<EnemyController>().ApplyDamage(damage);
+            SoundManager.PlayEnemyHit();
 
             //Maybe move this to player controller instead
             if (durability <= 0)

@@ -119,6 +119,18 @@ public class SoundManager : MonoBehaviour {
         instance.fightMusic.Play();
     }
 
+    public static void PlayVictory() {
+        instance.fightMusic.Stop();
+        instance.roamingMusic.Stop();
+        instance.victoryMusic.Play();
+    }
+
+    public static void PlayGameOver() {
+        instance.fightMusic.Stop();
+        instance.roamingMusic.Stop();
+        instance.gameOverMusic.Play();
+    }
+
     public static void OutOfCombat() {
         if (!instance.outOfCombatTimer) instance.StartCoroutine(instance.OutOfCombatTimer());
     }
