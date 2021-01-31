@@ -33,12 +33,24 @@ public class BaseWeapon : MonoBehaviour
         damageCollider.enabled = false;
     }
 
+    private void Update()
+    {
+        if (attackCooldown > 0)
+        {
+            attackCooldown -= Time.deltaTime;
+        }
+    }
+
     public void startAttacking()
     {
         if (isAttacking)
         {
             print("Stop spamming you idiot");
             //prevent repeating motion
+
+            if (attackCooldown <= 0)
+                stopAttacking();
+
             return;
         }
         print("test");
@@ -46,7 +58,7 @@ public class BaseWeapon : MonoBehaviour
         isAttacking = true;
         //starting animation
         animator.SetBool("IsAttacking", true);
-
+        attackCooldown = 1.5f;
         damageCollider.enabled = true;
     }
 
