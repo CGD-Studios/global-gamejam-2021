@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MENU.unity
     guid: 9fe65571385dffd42a1624ad04bf99e7
+  - enabled: 1
+    path: Assets/Scenes/Peru_Player_Controller.unity
+    guid: ebeeae44d780b63448b91d4a01f6bb93
   m_configObjects: {}

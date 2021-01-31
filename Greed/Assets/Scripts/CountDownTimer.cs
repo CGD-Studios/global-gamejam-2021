@@ -13,6 +13,10 @@ public class CountDownTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //StartCoroutine(Timer());
+    }
+
+    public void StartTimer() {
         StartCoroutine(Timer());
     }
 
@@ -23,6 +27,7 @@ public class CountDownTimer : MonoBehaviour
         do
         {
             timer -= Time.deltaTime;
+            if (timer <= 10) SoundManager.PlayClockFast();
 
             FormatText();
 
@@ -49,6 +54,7 @@ public class CountDownTimer : MonoBehaviour
         if (seconds < 0f)
         {
             timerText.text += "Times Up!";
+            GameController.TimerEnd();
         }
     }
 }
