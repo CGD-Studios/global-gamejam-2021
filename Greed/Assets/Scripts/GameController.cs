@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
@@ -42,8 +43,8 @@ public class GameController : MonoBehaviour {
     }
 
     public static void Death() {
-        //gameover
         SoundManager.PlayGameOver();
+        SceneManager.LoadScene(3);
     }
 
     public static void StartTimer() {
@@ -51,7 +52,12 @@ public class GameController : MonoBehaviour {
     }
 
     public static void TimerEnd() {
-        //gameover
         SoundManager.PlayGameOver();
+        SceneManager.LoadScene(3);
+    }
+
+    public static void WinGame() {
+        SoundManager.PlayVictory();
+        SceneManager.LoadScene(2);
     }
 }
