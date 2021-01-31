@@ -23,12 +23,12 @@ public class BaseWeapon : MonoBehaviour
 
     int attackCount;
 
+    public Sprite icon;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        pickUpCollider = GetComponent<BoxCollider>();
-        damageCollider = GetComponent<BoxCollider>();
         animator.SetInteger("WeaponType", weaponType);
         damageCollider.enabled = false;
     }
@@ -57,6 +57,7 @@ public class BaseWeapon : MonoBehaviour
         //tbh maybe move this bool to PlayerController instead
         isAttacking = true;
         //starting animation
+        animator.SetInteger("WeaponType", weaponType);
         animator.SetBool("IsAttacking", true);
         attackCooldown = 1.5f;
         damageCollider.enabled = true;
@@ -78,15 +79,16 @@ public class BaseWeapon : MonoBehaviour
     {
         Debug.Log("Collision Started On trigger enter");
 
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" && !other.isTrigger)
         {
             Debug.Log("Found Enemy");
             //Damage Enemy
-            Destroy(other);
+            //Destroy(other);
             durability -= 1;
+            GameController.ItemDamaged(this);
 
             //Maybe move this to player controller instead
-            if (durability == 0)
+            if (durability <= 0)
             {
                 weaponBreak();
             }
@@ -101,4 +103,16 @@ public class BaseWeapon : MonoBehaviour
         
     }
 
+    public void PickedUp() {
+        pickUpCollider.enabled = false;
+    }
+
+    public bool GetIsAttacking() {
+        return isAttacking;
+    }
+
+    //Only will happen when weapon gets destroyed
+    public void StopAnimation() {
+        animator.enabled = false;
+    }
 }
