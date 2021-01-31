@@ -7,8 +7,8 @@ public class BaseWeapon : MonoBehaviour
     
     public Animator animator;
     //for picking up weapon I guess
-    BoxCollider pickUpCollider;
-    BoxCollider damageCollider;
+    public BoxCollider pickUpCollider;
+    public BoxCollider damageCollider;
 
     //variables for the stats
     //make it public so designer can set the value
@@ -19,6 +19,9 @@ public class BaseWeapon : MonoBehaviour
 
     //variable for attacking status
     bool isAttacking;
+    float attackCooldown;
+
+    int attackCount;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,7 @@ public class BaseWeapon : MonoBehaviour
         pickUpCollider = GetComponent<BoxCollider>();
         damageCollider = GetComponent<BoxCollider>();
         animator.SetInteger("WeaponType", weaponType);
+        damageCollider.enabled = false;
     }
 
     public void startAttacking()
@@ -40,24 +44,33 @@ public class BaseWeapon : MonoBehaviour
         isAttacking = true;
         //starting animation
         animator.SetBool("IsAttacking", true);
+
+        damageCollider.enabled = true;
     }
 
+    //Animation event will call this function when the animation is done
     public void stopAttacking()
     {
         Debug.Log("Stop attacking");
         isAttacking = false;
         animator.SetBool("IsAttacking", false);
+
+        damageCollider.enabled = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision Started");
+        Debug.Log("Collision Started On trigger enter");
 
         if (isAttacking)
         {
-            if (collision.collider.tag == "Enemy")
+            Debug.Log("Is Attackingg");
+
+            if (other.tag == "Enemy")
             {
+                Debug.Log("Found Enemy");
                 //Damage Enemy
+                Destroy(other);
                 durability -= 1;
 
                 //Maybe move this to player controller instead
@@ -73,7 +86,7 @@ public class BaseWeapon : MonoBehaviour
     //need to remove from inventory after all
     private void weaponBreak()
     {
-        Destroy(this);
+        
     }
 
 }
