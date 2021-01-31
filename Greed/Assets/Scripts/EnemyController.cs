@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private int baseDamage = 5;
     [SerializeField]
-    private float attackDistance = 5.0f;
+    private float attackDistance = 1.0f;
     [SerializeField]
     private float attackCooldown = 1.0f;
     [SerializeField]
@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
 
     private NavMeshAgent navMeshAgent;
     private bool playerInArea;
+    private bool isInCooldown;
     private int health;
 
     // Start is called before the first frame update
@@ -39,7 +40,7 @@ public class EnemyController : MonoBehaviour
             // Raycast to see if can see player
             RaycastHit hit;
             Vector3 rayDirection = goal.position - transform.position;
-            if(Physics.Raycast(transform.position, rayDirection.normalized, out hit, rayDirection.magnitude))
+            if(Physics.Raycast(transform.position, rayDirection.normalized, out hit, rayDirection.magnitude, LayerMask.GetMask(playerTag)))
             {
                 if(hit.transform.gameObject.tag == playerTag)
                 {
@@ -50,10 +51,20 @@ public class EnemyController : MonoBehaviour
             // Check if player is close enough to be attacked
             if(rayDirection.magnitude <= attackDistance)
             {
-                // attack player
-                // TODO: implement proper attack logic
-                GameController.TakeDamage(baseDamage); //TO CHANGE
-                Debug.Log("Attack Player");
+                navMeshAgent.isStopped = true;
+                if (!isInCooldown)
+                {
+                    // attack player
+                    // TODO: implement proper attack logic
+                    GameController.TakeDamage(baseDamage); //TO CHANGE
+                    isInCooldown = true;
+                    StartCoroutine(StartCooldown());
+                    Debug.Log("Attack Player");
+                }
+            }
+            else
+            {
+                navMeshAgent.isStopped = false;
             }
         }
     }
@@ -74,6 +85,12 @@ public class EnemyController : MonoBehaviour
             playerInArea = false;
             navMeshAgent.isStopped = true;
         }
+    }
+
+    private IEnumerator StartCooldown()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        isInCooldown = false;
     }
 
     public void ApplyDamage(int damage)
