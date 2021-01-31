@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour {
 
         // Sets the movement vector with input
         movement = (transform.right * Input.GetAxisRaw("Horizontal")) + (transform.forward * Input.GetAxisRaw("Vertical"));
-        /*
         movement = ((transform.right * Input.GetAxisRaw("Horizontal")) + (transform.forward * Input.GetAxisRaw("Vertical"))).normalized;
 
         // Move the player and apply gravity when not grounded
@@ -110,9 +109,6 @@ public class PlayerController : MonoBehaviour {
             SelectWeapon(3);
         }
         if (Input.GetButtonDown("Inv5")) {
-
-        } //TODO Add more or delete inventory?
-        */
             SelectWeapon(4);
         } //TODO Add more or remove inventory?
     }
