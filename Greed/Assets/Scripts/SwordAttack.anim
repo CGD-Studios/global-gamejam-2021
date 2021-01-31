@@ -82,15 +82,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.16666667
         value: {x: 0.636, y: -0.95, z: 2.283}
-        inSlope: {x: 0, y: -0.0032491703, z: 0}
-        outSlope: {x: 0, y: -0.0032491703, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.21666667
-        value: {x: 0.636, y: -0.95009476, z: 1.5800445}
+        value: {x: 0.636, y: -0.086, z: 1.211}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -217,15 +217,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.16666667
         value: -0.95
-        inSlope: -0.0032491703
-        outSlope: -0.0032491703
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.21666667
-        value: -0.95009476
+        value: -0.086
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -271,7 +271,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.21666667
-        value: 1.5800445
+        value: 1.211
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -458,7 +458,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.21666667
-    functionName: StopAttacking
+    functionName: stopAttacking
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 79f3a0906b4d36d47a97d7b822862e6c, type: 3}
     floatParameter: 0
