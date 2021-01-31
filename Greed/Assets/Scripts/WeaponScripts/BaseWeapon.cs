@@ -77,7 +77,7 @@ public class BaseWeapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision Started On trigger enter");
+        //Debug.Log("Collision Started On trigger enter");
 
         if (other.tag == "Enemy" && !other.isTrigger)
         {
@@ -86,6 +86,7 @@ public class BaseWeapon : MonoBehaviour
             //Destroy(other);
             durability -= 1;
             GameController.ItemDamaged(this);
+            other.GetComponent<EnemyController>().ApplyDamage(damage);
 
             //Maybe move this to player controller instead
             if (durability <= 0)
