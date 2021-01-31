@@ -37,9 +37,11 @@ public class BaseWeapon : MonoBehaviour
     {
         if (isAttacking)
         {
+            print("Stop spamming you idiot");
             //prevent repeating motion
             return;
         }
+        print("test");
         //tbh maybe move this bool to PlayerController instead
         isAttacking = true;
         //starting animation
@@ -51,10 +53,12 @@ public class BaseWeapon : MonoBehaviour
     //Animation event will call this function when the animation is done
     public void stopAttacking()
     {
+        //this sequence is important so it doesn't cause bugs where the isAttacking is stucked at true forever 
         Debug.Log("Stop attacking");
-        isAttacking = false;
+
         animator.SetBool("IsAttacking", false);
 
+        isAttacking = false;
         damageCollider.enabled = false;
     }
 
@@ -62,24 +66,20 @@ public class BaseWeapon : MonoBehaviour
     {
         Debug.Log("Collision Started On trigger enter");
 
-        if (isAttacking)
+        if (other.tag == "Enemy")
         {
-            Debug.Log("Is Attackingg");
+            Debug.Log("Found Enemy");
+            //Damage Enemy
+            Destroy(other);
+            durability -= 1;
 
-            if (other.tag == "Enemy")
+            //Maybe move this to player controller instead
+            if (durability == 0)
             {
-                Debug.Log("Found Enemy");
-                //Damage Enemy
-                Destroy(other);
-                durability -= 1;
-
-                //Maybe move this to player controller instead
-                if (durability == 0)
-                {
-                    weaponBreak();
-                }
+                weaponBreak();
             }
         }
+
     }
 
     //Maybe handles weapon break logic in player controller instead

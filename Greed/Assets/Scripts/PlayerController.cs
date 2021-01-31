@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour {
     RaycastHit itemRayHit;
 
     // Inventory
-    public GameObject[] inventory; //Maybe change GameObject to item class - DO NOT FORGET remove "public"
+    public BaseWeapon[] inventory; //Maybe change GameObject to item class - DO NOT FORGET remove "public"
     int inventorySize = 5;
     int selectedInventory = 0;
     int weaponStored = 0;
-    [SerializeField] GameObject activeWeapon;
+    [SerializeField] BaseWeapon activeWeapon;
 
     //Weapon
     public BaseWeapon weapon;
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         player = GetComponent<CharacterController>();
         cam = GetComponentInChildren<Camera>();
-        inventory = new GameObject[inventorySize];
+        inventory = new BaseWeapon[inventorySize];
 
         isAttacking = false;
         isSwitching = false;
@@ -56,35 +56,56 @@ public class PlayerController : MonoBehaviour {
         // Attack input
         if (Input.GetButtonDown("Attack")) {
 
-            if (!isAttacking || !isSwitching)
+            if (activeWeapon)
             {
-                Debug.Log("Attacking");
-                weapon.startAttacking();
+                if (!isAttacking || !isSwitching)
+                {
+                    activeWeapon.startAttacking();
+                }
             }
-            //TODO attack
         }
         
         // Interact input
         if (Input.GetButtonDown("Interact")) {
             print("interacting");
+            BaseWeapon selectionWeapon;
+
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out itemRayHit, itemRange, LayerMask.GetMask("Weapon"))) {
                 print($"You interacted with {itemRayHit.transform.name}");
                 if (weaponStored == inventorySize) {
                     Destroy(inventory[selectedInventory]);
-                    inventory[selectedInventory] = itemRayHit.transform.gameObject;
-                    inventory[selectedInventory].transform.position = activeWeapon.transform.position;
-                    inventory[selectedInventory].transform.rotation = cam.transform.rotation;
-                    inventory[selectedInventory].transform.SetParent(activeWeapon.transform);
+
+                    selectionWeapon = itemRayHit.transform.GetComponent<BaseWeapon>();
+
+                    if (selectionWeapon)
+                    {
+                        inventory[selectedInventory] = selectionWeapon;
+                        inventory[selectedInventory].transform.position = activeWeapon.transform.position;
+                        inventory[selectedInventory].transform.rotation = cam.transform.rotation;
+                        inventory[selectedInventory].transform.SetParent(activeWeapon.transform);
+                    }
                 } else {
+                    selectionWeapon = itemRayHit.transform.GetComponent<BaseWeapon>();
                     for (int i = 0; i < inventorySize; i++) {
-                        if (!inventory[i]) {
-                            inventory[i] = itemRayHit.transform.gameObject;
-                            inventory[i].SetActive(false);
-                            weaponStored++;
-                            if (i == 0) {
-                                SelectWeapon(i); // Automatically selects the weapon if its the only one
+                        if (!inventory[i])
+                        {
+                            if (selectionWeapon)
+                            {
+                                inventory[i] = selectionWeapon;
+                                inventory[i].gameObject.SetActive(false);
+                                weaponStored++;
+                                if (i == 0)
+                                {
+                                    //Might need if somehow player were able to bypass the getting the initial weapon.
+                                    //if (!activeWeapon)
+                                    //{
+                                    //    activeWeapon = selectionWeapon;
+                                    //}
+
+                                    SelectWeapon(i); // Automatically selects the weapon if its the only one
+                                }
+                                break;
                             }
-                            break;
                         }
                     }
                 }
@@ -115,11 +136,12 @@ public class PlayerController : MonoBehaviour {
 
     // Selects weapon from your inventory
     void SelectWeapon(int invSlot) {
+
         if (inventory[invSlot]) { // If not empty
-            inventory[selectedInventory].SetActive(false);
+            inventory[selectedInventory].gameObject.SetActive(false);
             inventory[selectedInventory].transform.SetParent(null);
             selectedInventory = invSlot;
-            inventory[selectedInventory].SetActive(true);
+            inventory[selectedInventory].gameObject.SetActive(true);
             inventory[selectedInventory].transform.position = activeWeapon.transform.position;
             inventory[selectedInventory].transform.rotation = cam.transform.rotation;
             inventory[selectedInventory].transform.SetParent(activeWeapon.transform);
