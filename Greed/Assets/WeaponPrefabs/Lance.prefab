@@ -180,4 +180,4 @@ MonoBehaviour:
   damage: 30
   scoreValue: 10
   weaponType: 1
-  icon: {fileID: 21300000, guid: 389eb7148079f4b408e1fcfdd518ad29, type: 3}
+  icon: {fileID: 21300000, guid: 65f0c39c9c4e3b24ab5072ef72a500d0, type: 3}
