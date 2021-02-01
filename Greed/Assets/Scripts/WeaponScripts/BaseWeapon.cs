@@ -18,7 +18,7 @@ public class BaseWeapon : MonoBehaviour
     public int weaponType;
 
     [SerializeField]
-    private int durabilityLostPerHit = 10;
+    public int durabilityLostPerHit = 10;
 
     //variable for attacking status
     bool isAttacking;

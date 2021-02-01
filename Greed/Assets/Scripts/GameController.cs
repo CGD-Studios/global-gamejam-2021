@@ -65,8 +65,19 @@ public class GameController : MonoBehaviour {
     }
 
     public static void WinGame() {
+        instance.CalculateScore();
         SoundManager.PlayVictory();
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(2);
+    }
+
+    public void CalculateScore()
+    {
+        int score = 0;
+        foreach(var item in items)
+        {
+            score += item.storedWeapon.damage * (item.currentDurability / item.storedWeapon.durabilityLostPerHit);
+        }
+        SoundManager.score = score;
     }
 }

@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour {
     [SerializeField] AudioSource gameOverMusic;
 
     bool outOfCombatTimer;
+    public static int score;
 
     private void Awake() {
         if (!instance) {
