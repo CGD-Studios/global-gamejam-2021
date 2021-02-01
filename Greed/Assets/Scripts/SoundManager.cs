@@ -109,6 +109,8 @@ public class SoundManager : MonoBehaviour {
     }
 
     void PlayMenu() {
+        instance.gameOverMusic.Stop();
+        instance.victoryMusic.Stop();
         menuMusic.volume = 0;
         menuMusic.Play();
         StartCoroutine(MenuFade());

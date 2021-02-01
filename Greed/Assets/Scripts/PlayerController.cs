@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour {
         if (!grounded) {
             player.Move(Vector3.up * -9.81f * Time.deltaTime);
         } else if (movement.magnitude > 0) SoundManager.PlayWalk();
+        print(grounded);
 
         // Attack input
         if (Input.GetButtonDown("Attack")) {
@@ -123,7 +124,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if (Physics.OverlapSphere(transform.position, 7f, LayerMask.GetMask("Enemy")).Length > 0) {
+        if (Physics.OverlapSphere(transform.position, 3f, LayerMask.GetMask("Enemy")).Length > 0) {
             SoundManager.PlayFight();
         } else SoundManager.OutOfCombat();
     }
