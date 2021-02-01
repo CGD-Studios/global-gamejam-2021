@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     private bool playerInArea;
     private bool isInCooldown;
     private int health;
+    private Vector3 initialPosition;
 
     // Start is called before the first frame update
     void Awake()
@@ -30,23 +31,28 @@ public class EnemyController : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         // Other setup if necessary
         health = baseHealth;
+        initialPosition = transform.position;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(playerInArea)
         {
             // Raycast to see if can see player
             RaycastHit hit;
             Vector3 rayDirection = goal.position - transform.position;
-            if(Physics.Raycast(transform.position, rayDirection.normalized, out hit, rayDirection.magnitude))
+            if(Physics.Raycast(transform.position, rayDirection.normalized, out hit, rayDirection.magnitude, LayerMask.GetMask(playerTag, "Default")))
             {
                 if(hit.transform.gameObject.tag == playerTag)
                 {
                     SoundManager.PlayGhost();
                     navMeshAgent.destination = goal.position;
                 }
+            }
+            else
+            {
+                navMeshAgent.destination = initialPosition;
             }
 
             // Check if player is close enough to be attacked
@@ -60,7 +66,6 @@ public class EnemyController : MonoBehaviour
                     GameController.TakeDamage(baseDamage); //TO CHANGE
                     isInCooldown = true;
                     StartCoroutine(StartCooldown());
-                    Debug.Log("Attack Player");
                 }
             }
             else
@@ -75,7 +80,7 @@ public class EnemyController : MonoBehaviour
         if(other.tag == playerTag)
         {
             playerInArea = true;
-            navMeshAgent.isStopped = false;
+            //navMeshAgent.isStopped = false;
         }
     }
 
@@ -84,7 +89,8 @@ public class EnemyController : MonoBehaviour
         if(other.tag == playerTag)
         {
             playerInArea = false;
-            navMeshAgent.isStopped = true;
+            //navMeshAgent.isStopped = true;
+            navMeshAgent.destination = initialPosition;
         }
     }
 

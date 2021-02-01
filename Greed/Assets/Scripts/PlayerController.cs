@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour {
         if (!grounded) {
             player.Move(Vector3.up * -9.81f * Time.deltaTime);
         } else if (movement.magnitude > 0) SoundManager.PlayWalk();
-        print(grounded);
+        //print(grounded);
 
         // Attack input
         if (Input.GetButtonDown("Attack")) {
