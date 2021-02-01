@@ -114,6 +114,10 @@ public class SoundManager : MonoBehaviour {
     }
 
     public static void PlayRoaming() {
+        instance.clockFast.Stop();
+        instance.clockSlow.Stop();
+        instance.gameOverMusic.Stop();
+        instance.victoryMusic.Stop();
         instance.menuMusic.Stop();
         instance.fightMusic.Stop();
         instance.roamingMusic.Play();
@@ -123,16 +127,21 @@ public class SoundManager : MonoBehaviour {
         instance.outOfCombatTimer = false;
         instance.StopCoroutine(instance.OutOfCombatTimer());
         instance.roamingMusic.Stop();
-        instance.fightMusic.Play();
+        if (!instance.fightMusic.isPlaying)
+            instance.fightMusic.Play();
     }
 
     public static void PlayVictory() {
+        instance.clockFast.Stop();
+        instance.clockSlow.Stop();
         instance.fightMusic.Stop();
         instance.roamingMusic.Stop();
         instance.victoryMusic.Play();
     }
 
     public static void PlayGameOver() {
+        instance.clockFast.Stop();
+        instance.clockSlow.Stop();
         instance.fightMusic.Stop();
         instance.roamingMusic.Stop();
         instance.gameOverMusic.Play();

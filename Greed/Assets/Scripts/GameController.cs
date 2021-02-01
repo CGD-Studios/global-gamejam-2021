@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     [SerializeField] PlayerController player;
     [SerializeField] CountDownTimer timer;
     [SerializeField] BoxCollider theWin;
+    [SerializeField] GameObject disabledEnemies;
 
     private void Awake() {
         if (!instance) {
@@ -53,6 +54,7 @@ public class GameController : MonoBehaviour {
 
     public static void StartTimer() {
         instance.timer.StartTimer();
+        instance.disabledEnemies.SetActive(true);
         instance.theWin.enabled = true;
     }
 
