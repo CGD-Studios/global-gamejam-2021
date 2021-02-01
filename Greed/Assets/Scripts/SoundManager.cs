@@ -89,7 +89,10 @@ public class SoundManager : MonoBehaviour {
     }
 
     public static void PlayGhost() {
-        instance.ghost.Play();
+        if(!instance.ghost.isPlaying)
+        {
+            instance.ghost.Play();
+        }
     }
 
     public static void PlayGhostDeath() {

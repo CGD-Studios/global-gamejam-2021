@@ -44,6 +44,7 @@ public class EnemyController : MonoBehaviour
             {
                 if(hit.transform.gameObject.tag == playerTag)
                 {
+                    SoundManager.PlayGhost();
                     navMeshAgent.destination = goal.position;
                 }
             }
@@ -98,6 +99,7 @@ public class EnemyController : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
+            SoundManager.PlayGhostDeath();
             Destroy(gameObject);
         }
     }

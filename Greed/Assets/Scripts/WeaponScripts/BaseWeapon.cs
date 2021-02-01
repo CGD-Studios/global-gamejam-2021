@@ -17,6 +17,9 @@ public class BaseWeapon : MonoBehaviour
     public double scoreValue = 10;
     public int weaponType;
 
+    [SerializeField]
+    private int durabilityLostPerHit = 10;
+
     //variable for attacking status
     bool isAttacking;
     float attackCooldown;
@@ -85,7 +88,7 @@ public class BaseWeapon : MonoBehaviour
             //Damage Enemy
             //Destroy(other);
             durability -= 1;
-            GameController.ItemDamaged(this);
+            GameController.ItemDamaged(this, durabilityLostPerHit);
             other.GetComponent<EnemyController>().ApplyDamage(damage);
             SoundManager.PlayEnemyHit();
 

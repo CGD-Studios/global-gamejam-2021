@@ -159,4 +159,17 @@ public class PlayerController : MonoBehaviour {
         /*Gizmos.color = Color.red;
         Gizmos.DrawSphere(groundCheck.position, 0.1f);*/
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Respawn")
+        {
+            GameController.Death();
+        }
+
+        if(other.tag == "Finish")
+        {
+            GameController.WinGame();
+        }
+    }
 }

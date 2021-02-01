@@ -10,11 +10,14 @@ public class GameController : MonoBehaviour {
     [SerializeField] WeaponDurability[] items;
     [SerializeField] PlayerController player;
     [SerializeField] CountDownTimer timer;
+    [SerializeField] BoxCollider theWin;
 
     private void Awake() {
         if (!instance) {
             instance = this;
         } else Destroy(gameObject);
+
+        instance.theWin.enabled = false;
     }
 
     // Update is called once per frame
@@ -22,10 +25,10 @@ public class GameController : MonoBehaviour {
 
     }
 
-    public static void ItemDamaged(BaseWeapon weapon) {
+    public static void ItemDamaged(BaseWeapon weapon, int damage) {
         for (int i = 0; i < instance.items.Length; i++) {
             if (instance.items[i].storedWeapon == weapon) {
-                instance.items[i].TakeDamage(10);
+                instance.items[i].TakeDamage(damage);
             }
         }
     }
@@ -44,20 +47,24 @@ public class GameController : MonoBehaviour {
 
     public static void Death() {
         SoundManager.PlayGameOver();
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(3);
     }
 
     public static void StartTimer() {
         instance.timer.StartTimer();
+        instance.theWin.enabled = true;
     }
 
     public static void TimerEnd() {
         SoundManager.PlayGameOver();
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(3);
     }
 
     public static void WinGame() {
         SoundManager.PlayVictory();
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(2);
     }
 }
